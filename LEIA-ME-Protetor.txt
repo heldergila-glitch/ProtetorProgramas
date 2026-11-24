@@ -1,0 +1,46 @@
+PROTETOR DE PROGRAMAS PARA WINDOWS
+==================================
+
+Arquivos
+--------
+- protetor_programas.py: aplicativo principal.
+- criar_exe.bat: instala o PyInstaller e gera o executável.
+
+Como executar com Python
+------------------------
+1. Instale o Python 3 pelo site python.org. Durante a instalação, marque “Add Python to PATH”.
+2. Abra o Prompt de Comando na pasta do arquivo.
+3. Execute:
+   python protetor_programas.py
+4. Na primeira execução, crie a senha principal.
+5. Clique em “Adicionar programa” e selecione um arquivo .exe.
+6. Selecione o programa e clique em “Abrir com senha”.
+
+Como gerar o .exe
+-----------------
+1. Coloque protetor_programas.py e criar_exe.bat na mesma pasta no Windows.
+2. Dê duplo clique em criar_exe.bat.
+3. O executável será criado em dist\ProtetorProgramas.exe.
+4. Você pode criar um atalho desse arquivo na área de trabalho.
+
+Observação importante
+--------------------
+Este programa é um lançador protegido por senha. Ele controla a abertura feita pela lista do próprio programa, mas não consegue impedir que alguém abra diretamente o .exe original pelo Explorador de Arquivos, pelo menu Iniciar ou pelo Gerenciador de Tarefas.
+
+Para bloquear completamente a execução de aplicativos seria necessário um serviço do Windows, regras de segurança/controle parental e permissões administrativas. Isso é uma versão mais invasiva e deve ser feita com cuidado para não bloquear o próprio Windows.
+
+A configuração fica em:
+%APPDATA%\ProtetorProgramas\config.json
+
+Se esquecer a senha, feche o programa e apague essa pasta para iniciar uma nova configuração. Isso também remove a lista cadastrada.
+
+Como gerar sem instalar Python no seu computador
+--------------------------------------------------
+O arquivo build-windows.yml permite usar o compilador Windows do GitHub Actions. O Python é instalado apenas temporariamente no computador virtual de compilação, não no seu PC.
+
+Se você tiver uma conta GitHub:
+1. Crie um repositório novo.
+2. Envie protetor_programas.py para ele.
+3. Crie a pasta .github/workflows e envie build-windows.yml para dentro dela.
+4. Abra a aba Actions, selecione “Gerar executável Windows” e clique em “Run workflow”.
+5. Quando terminar, abra a execução concluída, baixe o artefato “ProtetorProgramas-Windows” e extraia o ProtetorProgramas.exe.
