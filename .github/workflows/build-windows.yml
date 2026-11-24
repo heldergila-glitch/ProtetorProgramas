@@ -1,0 +1,28 @@
+name: Gerar executável Windows
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Instalar Python temporariamente no ambiente de compilação
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar PyInstaller
+        run: python -m pip install --upgrade pyinstaller
+
+      - name: Gerar EXE
+        run: python -m PyInstaller --onefile --windowed --name ProtetorProgramas protetor_programas.py
+
+      - name: Disponibilizar executável para download
+        uses: actions/upload-artifact@v4
+        with:
+          name: ProtetorProgramas-Windows
+          path: dist/ProtetorProgramas.exe
