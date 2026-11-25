@@ -208,7 +208,10 @@ class ProtectedProgramsApp:
 
 def main():
     root = tk.Tk()
-    root.withdraw()
+    root.title(APP_NAME)
+    root.geometry("700x430")
+    root.minsize(560, 330)
+    root.update_idletasks()
     config = load_config()
     if config is None:
         password = ask_new_password(root)
@@ -217,7 +220,6 @@ def main():
             return
         config = create_config(password)
         save_config(config)
-    root.deiconify()
     ProtectedProgramsApp(root, config)
     root.mainloop()
 
